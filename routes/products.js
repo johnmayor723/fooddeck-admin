@@ -44,7 +44,7 @@ router.post('/create', (req, res) => {
 });
 
 // Update a product
-router.post('/edit/:id', (req, res) => {
+router.put('/edit/:id', (req, res) => {
   const { id } = req.params;
   const { name, category, price, description } = req.body;
   axios.put(`https://pantry-hub-server.onrender.com/api/products/${id}`, { name, category, price, description })
