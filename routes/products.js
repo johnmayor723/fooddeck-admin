@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
   axios.get('https://pantry-hub-server.onrender.com/api/products')
     .then(response => {
       const products = response.data
-      res.render('products', { products });
+      console.log(products)
+      //res.render('products', { products });
     })
     .catch(error => {
       console.error('Error fetching products:', error);
