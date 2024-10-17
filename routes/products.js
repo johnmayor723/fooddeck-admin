@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   axios.get(`https://pantry-hub-server.onrender.com/api/products/${id}`)
     .then(response => {
-      res.render('singleProduct', { product: response.data });
+      res.render('product', { product: response.data });
     })
     .catch(error => {
       console.error('Error fetching product:', error);
