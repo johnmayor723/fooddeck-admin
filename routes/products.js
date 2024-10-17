@@ -5,14 +5,7 @@ const axios = require('axios');
 // Get all products
 
 router.get('/', (req, res) => {
-  axios.get('https://pantry-hub-server.onrender.com/api/products')
-    .then(response => {
-      res.render('products', { products: response.data });
-    })
-    .catch(error => {
-      console.error('Error fetching products:', error);
-      res.status(500).send('Server Error');
-    });
+  res.send("hello world")
 });
 
 // Get single product by ID
