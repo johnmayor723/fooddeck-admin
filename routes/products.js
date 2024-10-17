@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     .then(response => {
       const products = response.data
       console.log(products)
-      //res.render('products', { products });
+      res.render('products', { products });
     })
     .catch(error => {
       console.error('Error fetching products:', error);
