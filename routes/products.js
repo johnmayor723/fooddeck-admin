@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 
 // Get all products
-router.get('/', (req, res) => {
+router.get('/products', (req, res) => {
   axios.get('https://pantry-hub-server.onrender.com/api/products')
     .then(response => {
       res.render('products', { products: response.data });
