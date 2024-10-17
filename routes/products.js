@@ -32,8 +32,8 @@ router.get('/:id', (req, res) => {
 
 // Create a new product (form submission)
 router.post('/create', (req, res) => {
-  const { name, category, price, description } = req.body;
-  axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description })
+  const { name, category, price, description, imageUrl, stock} = req.body;
+  axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description, imageUrl, stock})
     .then(response => {
       res.redirect('/products', { products : response.data});
     })
