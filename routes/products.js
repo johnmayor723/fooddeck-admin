@@ -4,7 +4,7 @@ const axios = require('axios');
 
 // Get all products
 
-router.get('/products', (req, res) => {
+router.get('/', (req, res) => {
   axios.get('https://pantry-hub-server.onrender.com/api/products')
     .then(response => {
       res.render('products', { products: response.data });
@@ -16,7 +16,7 @@ router.get('/products', (req, res) => {
 });
 
 // Get single product by ID
-router.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
   axios.get(`https://pantry-hub-server.onrender.com/api/products/${id}`)
     .then(response => {
@@ -29,7 +29,7 @@ router.get('/products/:id', (req, res) => {
 });
 
 // Create a new product (form submission)
-router.post('products/create', (req, res) => {
+router.post('/create', (req, res) => {
   const { name, category, price, description } = req.body;
   axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description })
     .then(response => {
@@ -42,7 +42,7 @@ router.post('products/create', (req, res) => {
 });
 
 // Update a product
-router.post('products/edit/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
   const { id } = req.params;
   const { name, category, price, description } = req.body;
   axios.put(`https://pantry-hub-server.onrender.com/api/products/${id}`, { name, category, price, description })
