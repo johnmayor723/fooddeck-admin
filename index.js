@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const indexRoute = require('./routes/IndexRoute')
+const productsRoutes = require('./routes/products')
 const productsRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
 
@@ -10,10 +12,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/', (req, res) =>{
-  res.render('index')
-});
-
+app.use('/', indexRoute);
 app.use('/products', productsRoutes);
 app.use('/orders', ordersRoutes);
 
