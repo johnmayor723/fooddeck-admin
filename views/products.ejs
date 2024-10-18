@@ -36,7 +36,7 @@
   <!-- Form to create a new product -->
   <div class="container">
     <h2>Create a New Product</h2>
-    <form action="/products/create" method="POST">
+    <form action="/products/create" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Product Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
@@ -60,12 +60,12 @@
         <textarea class="form-control" id="description" name="description" placeholder="Enter product description"></textarea>
       </div>
       <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="Enter product image URL">
+        <label for="imageUrl">Image</label>
+        <input type="file" class="form-control" id="imageUrl" name="productImage" placeholder="Upload an image">
       </div>
        <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input type="text" class="form-control" id="imageUrl" name="stock" placeholder="Number of Stock">
+        <label for="imageUrl">Product Stock</label>
+        <input type="text" class="form-control" id="imageUrl" name="stock" placeholder="Number in  Stock">
       </div>
       <button type="submit" class="btn btn-primary">Create Product</button>
     </form>

@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+
+// Placeholder for products array/database
+let products = [];
+
+
+// Export a function that accepts 'upload' middleware
+module.exports = (upload) => {
+
+
 // Get all products
 
 router.get('/', (req, res) => {
@@ -31,11 +40,29 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new product (form submission)
-router.post('/create', (req, res) => {
-  const { name, category, price, description, imageUrl, stock} = req.body;
-  axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description, imageUrl, stock})
-    .then(response => {
-      res.redirect('/products');
+router.post('/create', upload.single("productImage"),  (req, res) => {
+ 
+
+  const { name, category, price, description, stock} = req.body;
+  // Create the new product object
+
+    
+// Access the uploaded file's path
+  // Access the uploaded file's path
+    const productImage = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const newProduct = {
+      id: products.length + 1,  // Simplified for demo purposes
+      name,
+      price,
+      description,
+      imageUrl: productImage
+    };
+
+
+
+  axios.post('https://pantry-hub-server.onrender.com/api/products', {newProduct})
+    .then(response => {      res.redirect('/products');
     })
     .catch(error => {
       console.error('Error creating product:', error);
@@ -70,4 +97,6 @@ router.post('/delete/:id', (req, res) => {
     });
 });
 
-module.exports = router;
+ return  router;
+
+};
