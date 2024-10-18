@@ -36,14 +36,14 @@ module.exports = (upload) => {
 
     // Access the uploaded file's path
     const productImage = req.file ? `/uploads/${req.file.filename}` : null;
-
+    let imageUrl = productImage 
     const newProduct = {
       name,
       price,
       description,
       stock,
       category,
-      imageUrl: productImage
+      imageUrl
     };
 
     axios.post('https://pantry-hub-server.onrender.com/api/products', newProduct)
