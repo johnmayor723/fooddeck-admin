@@ -42,6 +42,7 @@ module.exports = (upload) => {
       price,
       description,
       stock,
+      category,
       imageUrl: productImage
     };
 
