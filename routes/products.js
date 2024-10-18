@@ -35,7 +35,7 @@ router.post('/create', (req, res) => {
   const { name, category, price, description, imageUrl, stock} = req.body;
   axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description, imageUrl, stock})
     .then(response => {
-      res.redirect('/products', { products : response.data});
+      res.redirect('/products');
     })
     .catch(error => {
       console.error('Error creating product:', error);
