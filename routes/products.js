@@ -35,7 +35,7 @@ router.post('/create', (req, res) => {
   const { name, category, price, description, imageUrl, stock} = req.body;
   axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description, imageUrl, stock})
     .then(response => {
-      res.redirect('/products', { products : response.data});
+      res.render('products', { products : response.data});
     })
     .catch(error => {
       console.error('Error creating product:', error);
@@ -62,7 +62,7 @@ router.post('/delete/:id', (req, res) => {
   const { id } = req.params;
   axios.delete(`https://pantry-hub-server.onrender.com/api/products/${id}`)
     .then(response => {
-      res.redirect('/products');
+      res.redirect('products');
     })
     .catch(error => {
       console.error('Error deleting product:', error);
