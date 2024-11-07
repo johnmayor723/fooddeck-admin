@@ -59,9 +59,22 @@
             <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>">
           </div>
           <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" id="category" name="category" value="<%= product.category %>">
-          </div>
+  <label for="category">Category</label>
+  <select class="form-control" id="category" name="category">
+    <option value="farm fresh">farm fresh</option>
+    <option value="tubers & grains">tubers & grains</option>
+    <option value="fruits">fruits</option>
+    <option value="fish & meat">fish & meat</option>
+    <option value="food bundles">food bundles</option>
+    <option value="ingredients & condiments">ingredients & condiments</option>
+    <option value="health foods">health foods</option>
+    <option value="household items">household items</option>
+    <option value="baking products">baking products</option>
+    <option value="dairy products">dairy products</option>
+    <option value="packaged foods">packaged foods</option>
+    <option value="oil products">oil products</option>
+  </select>
+</div>
           <div class="form-group">
             <label for="price">Price</label>
             <input type="number" class="form-control" id="price" name="price" value="<%= product.price %>">
