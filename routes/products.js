@@ -30,12 +30,26 @@ router.get('/:id', (req, res) => {
     });
 });
 
+const axios = require('axios');
+
 // Create a new product (form submission)
 router.post('/create', (req, res) => {
-  const { name, category, price, description, imageUrl, stock} = req.body;
-  axios.post('https://pantry-hub-server.onrender.com/api/products', { name, category, price, description, imageUrl, stock})
+  const { name, category, price, description, imageUrl, stock, measurements } = req.body;
+
+  // Parse measurements if it's a JSON string
+  const parsedMeasurements = measurements ? JSON.parse(measurements) : [];
+
+  axios.post('https://pantry-hub-server.onrender.com/api/products', {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      stock,
+      measurements: parsedMeasurements
+    })
     .then(response => {
-      res.render('products', { products : response.data});
+      res.render('products', { products: response.data });
     })
     .catch(error => {
       console.error('Error creating product:', error);
@@ -46,8 +60,19 @@ router.post('/create', (req, res) => {
 // Update a product
 router.put('/edit/:id', (req, res) => {
   const { id } = req.params;
-  const { name, category, price, description , imageUrl} = req.body;
-  axios.put(`https://pantry-hub-server.onrender.com/api/products/${id}`, { name, category, price, description, imageUrl })
+  const { name, category, price, description, imageUrl, measurements } = req.body;
+
+  // Parse measurements if it's a JSON string
+  const parsedMeasurements = measurements ? JSON.parse(measurements) : [];
+
+  axios.put(`https://pantry-hub-server.onrender.com/api/products/${id}`, {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      measurements: parsedMeasurements
+    })
     .then(response => {
       res.redirect(`/products/${id}`);
     })
