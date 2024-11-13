@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-const axios = require('axios');
+//const axios = require('axios');
 
 // Create a new product (form submission)
 router.post('/create', (req, res) => {
