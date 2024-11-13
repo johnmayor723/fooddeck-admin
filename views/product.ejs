@@ -38,6 +38,7 @@
   <!-- Product Details Card -->
   <div class="container">
     <div class="row">
+      <!-- Main Product Details -->
       <div class="col-md-6">
         <div class="card mb-4 shadow-sm">
           <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="card-img-top">
@@ -50,8 +51,35 @@
         </div>
       </div>
 
-      <!-- Edit Form -->
+      <!-- Measurements Display Card -->
       <div class="col-md-6">
+        <h3>Measurements</h3>
+        <% if (product.measurements && product.measurements.length > 0) { %>
+          <% product.measurements.forEach((measurement, index) => { %>
+            <div class="card mb-3">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                  <img src="<%= measurement.imageUrl %>" alt="<%= measurement.name %>" class="card-img">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= measurement.name %></h5>
+                    <p class="card-text">Price: $<%= measurement.price %></p>
+                    <% if (measurement.quantity) { %>
+                      <p class="card-text">Quantity: <%= measurement.quantity %></p>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p>No measurements available for this product.</p>
+        <% } %>
+      </div>
+
+      <!-- Edit Form -->
+      <div class="col-md-12 mt-5">
         <h3>Edit Product</h3>
         <form action="/products/edit/<%= product._id %>?_method=PUT" method="POST">
           <div class="form-group">
@@ -59,22 +87,22 @@
             <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>">
           </div>
           <div class="form-group">
-  <label for="category">Category</label>
-  <select class="form-control" id="category" name="category">
-    <option value="farm fresh">farm fresh</option>
-    <option value="tubers & grains">tubers & grains</option>
-    <option value="fruits">fruits</option>
-    <option value="fish & meat">fish & meat</option>
-    <option value="food bundles">food bundles</option>
-    <option value="ingredients & condiments">ingredients & condiments</option>
-    <option value="health foods">health foods</option>
-    <option value="household items">household items</option>
-    <option value="baking products">baking products</option>
-    <option value="dairy products">dairy products</option>
-    <option value="packaged foods">packaged foods</option>
-    <option value="oil products">oil products</option>
-  </select>
-</div>
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category">
+              <option value="farm fresh">farm fresh</option>
+              <option value="tubers & grains">tubers & grains</option>
+              <option value="fruits">fruits</option>
+              <option value="fish & meat">fish & meat</option>
+              <option value="food bundles">food bundles</option>
+              <option value="ingredients & condiments">ingredients & condiments</option>
+              <option value="health foods">health foods</option>
+              <option value="household items">household items</option>
+              <option value="baking products">baking products</option>
+              <option value="dairy products">dairy products</option>
+              <option value="packaged foods">packaged foods</option>
+              <option value="oil products">oil products</option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="price">Price</label>
             <input type="number" class="form-control" id="price" name="price" value="<%= product.price %>">
@@ -87,6 +115,32 @@
             <label for="imageUrl">Image URL</label>
             <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="<%= product.imageUrl %>">
           </div>
+
+          <!-- Measurements Edit Section -->
+          <h4>Edit Measurements</h4>
+          <div id="measurements">
+            <% product.measurements.forEach((measurement, index) => { %>
+              <div class="measurement-item mb-3">
+                <div class="form-group">
+                  <label>Measurement Name</label>
+                  <input type="text" name="measurements[<%= index %>][name]" class="form-control" value="<%= measurement.name %>">
+                </div>
+                <div class="form-group">
+                  <label>Measurement Price</label>
+                  <input type="number" name="measurements[<%= index %>][price]" class="form-control" value="<%= measurement.price %>">
+                </div>
+                <div class="form-group">
+                  <label>Measurement Image URL</label>
+                  <input type="text" name="measurements[<%= index %>][imageUrl]" class="form-control" value="<%= measurement.imageUrl %>">
+                </div>
+                <div class="form-group">
+                  <label>Measurement Quantity (optional)</label>
+                  <input type="number" name="measurements[<%= index %>][quantity]" class="form-control" value="<%= measurement.quantity || '' %>">
+                </div>
+              </div>
+            <% }) %>
+          </div>
+
           <button type="submit" class="btn btn-primary">Update Product</button>
         </form>
 
