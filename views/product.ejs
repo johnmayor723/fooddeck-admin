@@ -134,8 +134,8 @@
                   <input type="text" name="measurements[<%= index %>][imageUrl]" class="form-control" value="<%= measurement.imageUrl %>">
                 </div>
                 <div class="form-group">
-                  <label>Measurement Quantity (optional)</label>
-                  <input type="number" name="measurements[<%= index %>][quantity]" class="form-control" value="<%= measurement.quantity || '' %>">
+                  <label>Measurement Unit </label>
+                  <input type="number" name="measurements[<%= index %>][unit]" class="form-control" value="<%= measurement.unit || '' %>">
                 </div>
               </div>
             <% }) %>
