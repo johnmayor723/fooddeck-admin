@@ -81,7 +81,7 @@
 
       <!-- Measurement Section -->
       <div id="measurements-container">
-        <h3>Measurements</h3>
+        <h3>Product Buying Options</h3>
         <button type="button" class="btn btn-secondary mb-3" onclick="addMeasurement()">Add Measurement</button>
         <div class="measurement-item form-group">
           <label>Measurement Name</label>
@@ -90,8 +90,7 @@
           <input type="number" class="form-control" name="measurements[0][price]" placeholder="Measurement price">
           <label>Measurement Image URL</label>
           <input type="text" class="form-control" name="measurements[0][imageUrl]" placeholder="Image URL">
-          <label>Measurement Unit</label>
-          <input type="text" class="form-control" name="measurements[0][unit]" placeholder="Image URL">
+          
         </div>
       </div>
 
@@ -138,9 +137,9 @@
       measurementItem.className = 'measurement-item form-group mt-4';
       measurementItem.innerHTML = `
         <label>Measurement Name</label>
-        <input type="text" class="form-control" name="measurements[${measurementCount}][name]" placeholder="Measurement name">
+        <input type="text" class="form-control" name="measurements[${measurementCount}][name]" placeholder=" name">
         <label>Measurement Price</label>
-        <input type="number" class="form-control" name="measurements[${measurementCount}][price]" placeholder="Measurement price">
+        <input type="number" class="form-control" name="measurements[${measurementCount}][price]" placeholder=" price">
         <label>Measurement Image URL</label>
         <input type="text" class="form-control" name="measurements[${measurementCount}][imageUrl]" placeholder="Image URL">
       `;
