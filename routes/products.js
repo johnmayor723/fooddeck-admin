@@ -53,7 +53,7 @@ router.post('/create', (req, res) => {
       price,
       description,
       imageUrl,
-      measurements: measurementsWithIds
+      measurements: measurementsWithIds;
     })
     .then(response => {
       res.redirect(`/products/${id}`);
@@ -84,7 +84,7 @@ router.put('/edit/:id', (req, res) => {
       price,
       description,
       imageUrl,
-      measurements: measurementsWithIds
+      measurements: measurementsWithIds;
     })
     .then(response => {
       res.redirect(`/products/${id}`);
