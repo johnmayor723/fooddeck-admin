@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { v4: uuidv4 } = require('uuid');
+
 
 // Get all products
 
@@ -37,22 +39,27 @@ router.post('/create', (req, res) => {
   const { name, category, price, description, imageUrl, stock, measurements } = req.body;
 
   // Parse measurements if it's a JSON string
-  const parsedMeasurements = measurements ? JSON.parse(measurements) : [];
+  const parsedMeasurements = measurements || [];
+  console.log('Measurements:', measurements);
+  const measurementsWithIds = parsedMeasurements.map((measurement) => ({
+    ...measurement,
+    id: uuidv4(), // Generate unique ID for each measurement
+  }));
 
-  axios.post('https://pantry-hub-server.onrender.com/api/products', {
+  console.log('measurements with id:', measurementsWithIds)
+  axios.put('https://pantry-hub-server.onrender.com/api/products/', {
       name,
       category,
       price,
       description,
       imageUrl,
-      stock,
-      measurements: parsedMeasurements
+      measurements: measurementsWithIds;
     })
     .then(response => {
-      res.render('products', { products: response.data });
+      res.redirect(`/products/${id}`);
     })
     .catch(error => {
-      console.error('Error creating product:', error);
+      console.error('Error updating product:', error);
       res.status(500).send('Server Error');
     });
 });
@@ -63,15 +70,21 @@ router.put('/edit/:id', (req, res) => {
   const { name, category, price, description, imageUrl, measurements } = req.body;
 
   // Parse measurements if it's a JSON string
-  const parsedMeasurements = measurements ? JSON.parse(measurements) : [];
+  const parsedMeasurements = measurements || [];
+  console.log('Measurements:', measurements);
+  const measurementsWithIds = parsedMeasurements.map((measurement) => ({
+    ...measurement,
+    id: uuidv4(), // Generate unique ID for each measurement
+  }));
 
+  console.log('measurements with id:', measurementsWithIds)
   axios.put(`https://pantry-hub-server.onrender.com/api/products/${id}`, {
       name,
       category,
       price,
       description,
       imageUrl,
-      measurements: parsedMeasurements
+      measurements: measurementsWithIds;
     })
     .then(response => {
       res.redirect(`/products/${id}`);
