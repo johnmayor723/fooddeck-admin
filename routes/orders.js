@@ -4,7 +4,7 @@ const axios = require('axios');
 
 // Get all orders
 router.get('/', (req, res) => {
-  axios.get('https://pantry-hub-server.onrender.com/api/orders')
+  axios.get('http://api.fooddeckpro.com.ng/api/orders')
     .then(response => {
       res.render('orders', { orders: response.data });
     })
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 // Get single order by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  axios.get(`https://pantry-hub-server.onrender.com/api/orders/${id}`)
+  axios.get(`http://api.fooddeckpro.com.ng/api/orders/${id}`)
     .then(response => {
       res.render('order', { order: response.data });
     })
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 // Create a new order
 router.post('/create', (req, res) => {
   const { customerName, items, total, status } = req.body;
-  axios.post('https://pantry-hub-server.onrender.com/api/orders', { customerName, items, total, status })
+  axios.post('http://api.fooddeckpro.com.ng/api/orders', { customerName, items, total, status })
     .then(response => {
       res.redirect('/orders');
     })
@@ -44,7 +44,7 @@ router.post('/create', (req, res) => {
 router.post('/edit/:id', (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
-  axios.put(`https://pantry-hub-server.onrender.com/api/orders/${id}`, { status })
+  axios.post(`http://api.fooddeckpro.com.ng/api/orders/${id}`, { status })
     .then(response => {
       res.redirect(`/orders/${id}`);
     })
@@ -57,7 +57,7 @@ router.post('/edit/:id', (req, res) => {
 // Delete an order
 router.post('/delete/:id', (req, res) => {
   const { id } = req.params;
-  axios.delete(`https://pantry-hub-server.onrender.com/api/orders/${id}`)
+  axios.delete(`http://api.fooddeckpro.com.ng/api/orders/${id}`)
     .then(response => {
       res.redirect('/orders');
     })
