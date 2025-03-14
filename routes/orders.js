@@ -4,7 +4,7 @@ const axios = require('axios');
 
 // Get all orders
 router.get('/', (req, res) => {
-  axios.get('http://api.fooddeckpro.com.ng/api/orders')
+  axios.get('https://api.foodliie.com/api/orders')
     .then(response => {
       res.render('orders', { orders: response.data });
     })
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 // Get single order by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  axios.get(`http://api.fooddeckpro.com.ng/api/orders/${id}`)
+  axios.get(`https://api.foodliie.com/api/orders/${id}`)
     .then(response => {
       res.render('order', { order: response.data });
     })
@@ -44,7 +44,7 @@ router.post('/create', (req, res) => {
 router.post('/edit/:id', (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
-  axios.post(`http://api.fooddeckpro.com.ng/api/orders/${id}`, { status })
+  axios.post(`https://api.foodliie.com/api/orders/${id}`, { status })
     .then(response => {
       res.redirect(`/orders/${id}`);
     })
@@ -57,7 +57,7 @@ router.post('/edit/:id', (req, res) => {
 // Delete an order
 router.post('/delete/:id', (req, res) => {
   const { id } = req.params;
-  axios.delete(`http://api.fooddeckpro.com.ng/api/orders/${id}`)
+  axios.delete(`http://api.foodliie.com/api/orders/${id}`)
     .then(response => {
       res.redirect('/orders');
     })

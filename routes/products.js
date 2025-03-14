@@ -80,7 +80,7 @@ router.put('/edit/:id', (req, res) => {
 });
 
 // Delete a product
-router.post('/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   const { id } = req.params;
   axios.delete(`https://api.foodliie.com/api/products/${id}`)
     .then(response => {
