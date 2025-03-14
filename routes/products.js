@@ -5,7 +5,7 @@ const axios = require('axios');
 // Get all products
 
 router.get('/', (req, res) => {
-  axios.get('http://api.fooddeckpro.com.ng/api/products')
+  axios.get('https://api.foodliie.com/api/products')
     .then(response => {
       const products = response.data
       console.log(products)
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 // Get single product by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  axios.get(`http://api.fooddeckpro.com.ng/api/products/${id}`)
+  axios.get(`https://api.foodliie.com/api/products/${id}`)
     .then(response => {
       res.render('product', { product: response.data });
     })
@@ -37,7 +37,7 @@ router.post('/create', (req, res) => {
   const { name, category, price, description, imageUrl, stock, measurements } = req.body;
 
 const parsedMeasurements = measurements || [];
-  axios.post('http://api.fooddeckpro.com.ng/api/products', {
+  axios.post('https://api.foodliie.com/api/products', {
       name,
       category,
       price,
@@ -62,7 +62,7 @@ router.put('/edit/:id', (req, res) => {
 
   const parsedMeasurements = measurements || [];
 
-  axios.put(`http://api.fooddeckpro.com.ng/api/products/${id}`, {
+  axios.put(`https://api.foodliie.com/api/products/${id}`, {
       name,
       category,
       price,
@@ -82,7 +82,7 @@ router.put('/edit/:id', (req, res) => {
 // Delete a product
 router.post('/delete/:id', (req, res) => {
   const { id } = req.params;
-  axios.delete(`http://api.fooddeckpro.com.ng/api/products/${id}`)
+  axios.delete(`https://api.foodliie.com/api/products/${id}`)
     .then(response => {
       res.redirect('products');
     })
