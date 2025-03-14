@@ -46,7 +46,8 @@
                 <h5 class="card-title">Order ID: <%= order._id %></h5>
                 <p class="card-text"><strong>Customer:</strong> <%= order.customerName %></p>
                 <p class="card-text"><strong>Status:</strong> <%= order.status %></p>
-                <p class="card-text"><strong>Total Price:</strong> $<%= order.totalPrice %></p>
+                <p class="card-text"><strong>Total Price:</strong> 
+₦<%= order.totalPrice %></p>
                 <a href="/orders/<%= order._id %>" class="btn btn-primary">Edit Order</a>
               </div>
             </div>
