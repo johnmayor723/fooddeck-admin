@@ -80,16 +80,29 @@ router.put('/edit/:id', (req, res) => {
 });
 
 // Delete a product
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  axios.delete(`https://api.foodliie.com/api/products/${id}`)
-    .then(response => {
-      res.redirect('products');
-    })
-    .catch(error => {
-      console.error('Error deleting product:', error);
-      res.status(500).send('Server Error');
-    });
-});
 
+  try {
+    const response = await axios.delete(`https://api.foodliie.com/api/products/${id}`);
+    
+    console.log('Delete response:', response.status, response.data);
+
+    res.redirect('/products'); // Make sure this route exists
+  } catch (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code out of 2xx range
+      console.error('API responded with error:', error.response.status, error.response.data);
+      res.status(error.response.status).send(error.response.data);
+    } else if (error.request) {
+      // The request was made but no response received
+      console.error('No response received from API:', error.request);
+      res.status(500).send('No response from API');
+    } else {
+      // Something else went wrong
+      console.error('Request setup error:', error.message);
+      res.status(500).send('Error setting up request');
+    }
+  }
+});
 module.exports = router;
