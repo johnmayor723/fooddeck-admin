@@ -68,4 +68,31 @@ router.post('/delete/:id', (req, res) => {
     });
 });
 
+// POST /client/update-agent-sales
+router.post('/update-agent-sales', async (req, res) => {
+  const { couponCode, amount } = req.body;
+
+  if (!couponCode || !amount) {
+    return res.status(400).json({ message: 'couponCode and amount are required' });
+  }
+
+  try {
+    const response = await axios.patch("https://api.foodliie.com/api/agent", {
+      code:couponCode,
+      amount,
+    });
+
+    res.status(200).json({
+      message: 'Agent sales updated successfully',
+      data: response.data,
+    });
+  } catch (error) {
+    console.error('Error updating agent sales:', error.response?.data || error.message);
+    res.status(500).json({
+      message: 'Failed to update agent sales',
+      error: error.response?.data || error.message,
+    });
+  }
+});
+
 module.exports = router;

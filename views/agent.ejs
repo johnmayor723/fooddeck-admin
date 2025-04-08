@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= agent.name %> - Agent Profile</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">FoodDeck</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/agents">Agents</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Agent Profile: <%= agent.name %></h2>
+    <div class="card mb-4">
+      <div class="card-body">
+        <p><strong>Email:</strong> <%= agent.email %></p>
+        <p><strong>Coupon Code:</strong> <%= agent.couponCode %></p>
+        <p><strong>Total Sales:</strong> ₦<%= agent.totalSales %></p>
+      </div>
+    </div>
+
+    <!-- Update Sales Form -->
+    <h4>Update Sales</h4>
+    <form action="/update-agent-sales" method="POST">
+      <div class="form-group">
+        <label for="couponCode">Coupon Code</label>
+        <input type="text" class="form-control" id="couponCode" name="couponCode" value="<%= agent.couponCode %>" required readonly>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount to Add (₦)</label>
+        <input type="number" class="form-control" id="amount" name="amount" required min="1">
+      </div>
+      <button type="submit" class="btn btn-success">Update Sales</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
