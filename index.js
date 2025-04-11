@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const methodOveride = require("method-override")
 
 const indexRoute = require('./routes/IndexRoute')
+const usersRoutes = require('./routes/users');
+
 //const productsRoutes = require('./routes/products')
 const productsRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
@@ -16,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOveride('_method'));
 
 app.use('/', indexRoute);
+app.use('/users', usersRoutes);
 app.use('/products', productsRoutes);
 app.use('/orders', ordersRoutes);
 
