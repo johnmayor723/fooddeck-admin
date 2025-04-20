@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 // Get single order by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  axios.get(`https://api.foodliie.com/api/orders/${id}`)
+  axios.get(`https://api.foodliie.com/api/orders/orders/${id}`)
     .then(response => {
       res.render('order', { order: response.data });
     })
@@ -56,7 +56,7 @@ router.post('/edit/:id', (req, res) => {
 });
 
 // Delete an order
-router.post('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const { id } = req.params;
   axios.delete(`http://api.foodliie.com/api/orders/${id}`)
     .then(response => {
@@ -66,6 +66,25 @@ router.post('/delete/:id', (req, res) => {
       console.error('Error deleting order:', error);
       res.status(500).send('Server Error');
     });
+});
+
+router.delete('/', async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    const response = await axios.delete('https://api.foodliie.com/api/orders', {
+      data: { orderId },
+    });
+
+    if (response.status === 200) {
+      return res.redirect('/management/orders');
+    } else {
+      return res.status(response.status).send('Failed to delete order.');
+    }
+  } catch (error) {
+    console.error('Error deleting order:', error.message);
+    return res.status(500).send('Server error while deleting order.');
+  }
 });
 
 // POST /client/update-agent-sales

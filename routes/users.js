@@ -15,5 +15,23 @@ router.get('/', async (req, res) => {
     res.status(500).send('Error loading users');
   }
 });
+/*router.delete('/', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const response = await axios.delete('https://api.foodliie.com/api/auth', {
+      data: { email },
+    });
+
+    if (response.status === 200) {
+      return res.redirect('/');
+    } else {
+      return res.status(response.status).send('Failed to delete user.');
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error.message);
+    return res.status(500).send('Server error while deleting user.');
+  }
+});*/
 
 module.exports = router;

@@ -44,11 +44,14 @@
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Order ID: <%= order._id %></h5>
-                <p class="card-text"><strong>Customer:</strong> <%= order.customerName %></p>
+                <p class="card-text"><strong>Customer:</strong> <%= order.name %></p>
                 <p class="card-text"><strong>Status:</strong> <%= order.status %></p>
                 <p class="card-text"><strong>Total Price:</strong> 
-₦<%= order.totalPrice %></p>
-                <a href="/orders/<%= order._id %>" class="btn btn-primary">Edit Order</a>
+₦<%= order.totalAmount %></p>
+               <a href="/orders/<%= order._id %>" class="btn btn-primary">Edit Order</a>
+<form action="/orders/<%= order._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this order?');">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
               </div>
             </div>
           </div>

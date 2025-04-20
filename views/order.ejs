@@ -33,19 +33,16 @@
 
   <!-- Order Details -->
   <div class="container">
-    <h3>Order ID: <%= order._id %></h3>
+    <h3>Order ID: <%= order.orderId %></h3>
     <p><strong>Status:</strong> <%= order.status %></p>
-    <p><strong>Customer Name:</strong> <%= order.customerName %></p>
-    <p><strong>Total Price:</strong> $<%= order.totalPrice %></p>
-    
-    <h4>Items in this order:</h4>
-    <ul class="list-group">
-      <% order.items.forEach(item => { %>
-        <li class="list-group-item">
-          <strong>Product:</strong> <%= item.productName %> - <strong>Quantity:</strong> <%= item.quantity %>
-        </li>
-      <% }) %>
-    </ul>
+    <p><strong>Customer Name:</strong> <%= order.name %></p>
+    <p><strong>Email:</strong> <%= order.email %></p>
+    <p><strong>Address:</strong> <%= order.address %></p>
+    <p><strong>Mobile:</strong> <%= order.mobile %></p>
+    <p><strong>Order Notes:</strong> <%= order.ordernotes || 'None' %></p>
+    <p><strong>Payment Method:</strong> <%= order.paymentmethod %></p>
+    <p><strong>Total Amount:</strong> ₦<%= order.totalAmount.toLocaleString() %></p>
+    <p><strong>Created At:</strong> <%= new Date(order.createdAt).toLocaleString() %></p>
 
     <!-- Order Status Update Form -->
     <h4 class="mt-4">Update Order Status</h4>
@@ -53,7 +50,7 @@
       <div class="form-group">
         <label for="status">Change Status</label>
         <select name="status" id="status" class="form-control">
-          <option value="pending" <%= order.status === 'pending' ? 'selected' : '' %>>Pending</option>
+          <option value="processing" <%= order.status === 'processing' ? 'selected' : '' %>>Processing</option>
           <option value="shipped" <%= order.status === 'shipped' ? 'selected' : '' %>>Shipped</option>
           <option value="delivered" <%= order.status === 'delivered' ? 'selected' : '' %>>Delivered</option>
         </select>
